@@ -1,0 +1,41 @@
+@font-face {
+    src: url(font/glitch.otf);
+    font-family: glitch;
+}
+
+header{
+    margin-bottom: 3%;
+    border-bottom: 1px solid;
+    border-color: #e3e300;
+}
+
+p{
+    font-size: 2rem;
+}
+
+img{
+    margin: auto;
+    margin-top: 2%;
+}
+
+.card{
+    margin: auto;
+}
+
+.col{
+    align-content: center;
+}
+
+.card{
+    background-color: #4e4848;
+    border-color: #d0d000;
+    border-radius: 1px;
+    box-shadow: 0 0 5px yellow;
+}
+
+#headerText{
+    font-family: glitch;
+    color: #e3e300;
+    margin: auto;
+    font-size: 3.5rem;
+}

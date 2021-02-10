@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/styling.css">
+    <meta charset="UTF-8">
+    <title>CryptoHub</title>
+</head>
+<body style="background-color: #1d1d1f; overflow-x: hidden">
+<header>
+    <nav class="navbar navbar-dark bg-dark">
+        <span class="navbar-brand mb-0 h1" id="headerText">CryptoHub</span>
+    </nav>
+</header>
+<main>
+    <div class= "row row-cols-1 row-cols-md-3 mb-3 text-center cardRow">
+        <div class="col">
+            <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+                <img src="../media/cardano.svg" style="width: 20%; height: 20%;">
+                <p id="ADA"> </p>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+                <img src="../media/chainlink-link-logo.svg" style="width: 20%; height: 20%;">
+                <p id="LINK"> </p>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+                <img src="../media/polkadot-new-dot-logo.svg" style="width: 20%; height: 20%;">
+                <p id="DOT"> </p>
+            </div>
+        </div>
+    </div>
+    <div class= "row row-cols-1 row-cols-md-3 mb-3 text-center cardRow">
+        <div class="col">
+            <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+                <img src="../media/bitcoin-btc-logo.svg" style="width: 20%; height: 20%;">
+                <p id="BTC"> </p>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+                <img src="../media/ethereum-eth-logo.svg" style="width: 20%; height: 20%;">
+                <p id="ETH"> </p>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+                <img src="../media/vechain-vet-logo.svg" style="width: 20%; height: 20%;">
+                <p id="VET"> </p>
+            </div>
+        </div>
+    </div>
+</main>
+<footer>
+
+</footer>
+</body>
+<script>
+    var coins = ["ADA", "LINK", "DOT", "BTC", "ETH", "VET"]
+    var coinID;
+    setInterval(updatePrice, 1000);
+
+    function updatePrice() {
+        for (i = 0; i < coins.length; i++) {
+            (function (i) {
+            coinID = "#" + coins[i];
+            $.ajax({
+                url: "https://api.binance.com/api/v3/ticker/price",
+                type: "GET",
+                data: {
+                    symbol: coins[i]+"USDT"
+                },
+                success: function (response) {
+                    console.log(response.price);
+                    document.getElementById(coins[i]).innerText = coins[i] + " price: $" + response.price;
+                    console.log(i);
+                },
+                error: function (response) {
+                    console.log(response);
+                    alert("ERROR");
+                },
+            });
+            })(i);
+        }
+    }
+</script>
+</html>
