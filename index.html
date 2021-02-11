@@ -9,8 +9,14 @@
 </head>
 <body style="background-color: #1d1d1f; overflow-x: hidden">
 <header>
-    <nav class="navbar navbar-dark bg-dark">
-        <span class="navbar-brand mb-0 h1" id="headerText">CryptoHub</span>
+    <nav class="navbar navbar-dark bg-dark" id="containerHeader">
+        <div id="headerTitleDiv">
+            <span class="navbar-brand mb-0 h1" id="headerText">CryptoHub</span>
+        </div>
+        <div class="form-check form-switch" id="currencySwitch">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+            <label class="form-check-label" for="flexSwitchCheckChecked" id="switchText">Toggle for EUR</label>
+        </div>
     </nav>
 </header>
 <main>
@@ -68,9 +74,27 @@
 </footer>
 </body>
 <script>
-    var coins = ["ADA", "LINK", "DOT", "BTC", "ETH", "VET", "TRX"]
-    var coinID;
+    let coins = ["ADA", "LINK", "DOT", "BTC", "ETH", "VET", "TRX"]
+    let coinID;
+    let symbol = "$";
+    let currency = "USDT";
     setInterval(updatePrice, 1000);
+
+    /*if ($("#flexSwitchCheckChecked").is(":checked")) {
+        currency = "EUR";
+    } else {
+        currency = "USDT";
+    }*/
+
+    $("#flexSwitchCheckChecked").change(function () {
+        if ($("#flexSwitchCheckChecked").is(":checked")) {
+            symbol = "€";
+            currency = "EUR";
+        } else {
+            symbol = "$";
+            currency = "USDT";
+        }
+    })
 
     function updatePrice() {
         for (i = 0; i < coins.length; i++) {
@@ -80,16 +104,16 @@
                 url: "https://api.binance.com/api/v3/ticker/price",
                 type: "GET",
                 data: {
-                    symbol: coins[i]+"USDT"
+                    symbol: coins[i]+currency
                 },
                 success: function (response) {
                     console.log(response.price);
-                    document.getElementById(coins[i]).innerText = coins[i] + " price: $" + response.price;
+                    document.getElementById(coins[i]).innerText = coins[i] + " price: " + symbol + response.price;
                     console.log(i);
                 },
                 error: function (response) {
                     console.log(response);
-                    alert("ERROR");
+                    document.getElementById(coins[i]).innerText = "-";
                 },
             });
             })(i);

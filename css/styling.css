@@ -33,9 +33,39 @@ img{
     box-shadow: 0 0 5px yellow;
 }
 
+#containerHeader{
+    display: flex;
+}
+
+#containerHeader:before {
+    content: " ";
+}
+
 #headerText{
     font-family: glitch;
     color: #e3e300;
-    margin: auto;
     font-size: 3.5rem;
+    margin: auto;
+}
+
+#containerHeader:before, #currencySwitch{
+    flex: 1;
+    justify-content: flex-end;
+    margin-left: 30%;
+}
+
+
+#switchText{
+    color: #d0d000;
+}
+
+.form-check-input:focus {
+    border-color: #cb1b14;
+    outline: 0;
+    box-shadow: 0 0 0 0.05rem rgb(190, 224, 211);
+}
+
+.form-check-input:checked {
+    background-color: #d0d000;
+    border-color: black;
 }
